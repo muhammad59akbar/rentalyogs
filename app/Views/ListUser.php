@@ -3,7 +3,7 @@
 <div class="main-content mt-5" id="mainContent">
     <h2 class="mt-2">List User</h2>
     <hr>
-
+    <?= $this->include('AddUser'); ?>
 
 
 
@@ -30,7 +30,7 @@
                     <td><?= $user['roles'] ?></td>
                     <td>
                         <a href="<?= base_url('/Admin/DetailUser/' . url_title($user['fullname'], '-', true)); ?>" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-                        <form class="d-inline" method="post" action="">
+                        <form class="d-inline" method="post" action="<?= base_url('/Admin//DeleteUser/' . $user['id']) ?>">
 
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin ingin menghapus Pengguna ini ???')"><i class="bi bi-archive-fill"></i></button>
