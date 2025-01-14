@@ -7,15 +7,12 @@
     <title><?= $title ?></title>
     <link rel="stylesheet" href="<?= base_url('assets/css/Me.css') ?>" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <script type="text/javascript" src="<?= base_url('assets') ?>/plugins/ckeditor5/ckeditor.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<style>
-    .ck-editor__editable {
-        min-height: 200px;
-    }
-</style>
+
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light  fixed-top" style="background-color: #929292;">
@@ -37,8 +34,16 @@
                 <li class="nav-item border-bottom border-white">
                     <a class="nav-link text-white" href="<?= base_url('/') ?>">Dashboard</a>
                 </li>
+                <?php if (in_groups(['Admin'])) : ?>
+                    <li class="nav-item border-bottom border-white">
+                        <a class="nav-link text-white" href="<?= base_url('/Admin/ListUser') ?>">List User</a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item border-bottom border-white">
-                    <a class="nav-link text-white" href="<?= base_url('/Admin/ListUser') ?>">List User</a>
+                    <a class="nav-link text-white" href="<?= base_url('/ListMobil') ?>">List Mobil</a>
+                </li>
+                <li class="nav-item border-bottom border-white">
+                    <a class="nav-link text-white" href="<?= base_url('/ListPinjaman') ?>">List Pinjaman</a>
                 </li>
 
 
