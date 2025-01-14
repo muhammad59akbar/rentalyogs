@@ -10,6 +10,17 @@ use CodeIgniter\Validation\StrictRules\Rules;
 
 class Validation extends BaseConfig
 {
+
+    public function less_than_date(string $str, string $fields, array $data): bool
+    {
+        return strtotime($str) < strtotime($data[$fields]);
+    }
+
+    public function greater_than_date(string $str, string $fields, array $data): bool
+    {
+        return strtotime($str) > strtotime($data[$fields]);
+    }
+
     // --------------------------------------------------------------------
     // Setup
     // --------------------------------------------------------------------
@@ -25,7 +36,9 @@ class Validation extends BaseConfig
         FormatRules::class,
         FileRules::class,
         CreditCardRules::class,
-        \Myth\Auth\Authentication\Passwords\ValidationRules::class
+        \Myth\Auth\Authentication\Passwords\ValidationRules::class,
+        Validation::class
+        // \App\Validation\DateRules::class,
     ];
 
     /**
