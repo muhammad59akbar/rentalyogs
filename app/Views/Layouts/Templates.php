@@ -7,6 +7,8 @@
     <title><?= $title ?></title>
     <link rel="stylesheet" href="<?= base_url('assets/css/Me.css') ?>" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -61,7 +63,39 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="<?= base_url('assets/js/script.js') ?>"></script>
+    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.2.0/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.print.min.js"></script>
+
     <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                paging: false,
+                "bInfo": false,
+
+
+                layout: {
+                    topStart: {
+                        buttons: [{
+
+                                extend: 'pdf'
+                            },
+                            {
+                                extend: 'print',
+                                className: 'btn btn-primary',
+                                text: 'Print',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4]
+                                }
+
+                            }
+                        ],
+
+
+                    }
+                }
+            });
+        });
         $(document).ready(function() {
             $('.navbar-toggler').click(function() {
                 $('#sidebar').toggleClass('active');
@@ -69,6 +103,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>

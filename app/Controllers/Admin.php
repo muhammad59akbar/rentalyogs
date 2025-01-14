@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\MobilsModels;
+use App\Models\PinjamanModels;
 use Myth\Auth\Models\GroupModel;
 use Myth\Auth\Models\UserModel;
 use Myth\Auth\Password;
@@ -10,16 +12,46 @@ class Admin extends BaseController
 {
     protected $userModel;
     protected $groupModel;
+    protected $pinjamModel;
+    protected $mobilModel;
 
     public function __construct()
     {
         $this->userModel = new UserModel();
         $this->groupModel = new GroupModel();
+        $this->pinjamModel = new PinjamanModels();
+        $this->mobilModel = new MobilsModels();
     }
     public function index(): string
     {
+
+        $user_id = user_id();
+        if (in_groups('Admin')) {
+            $totalUser = $this->userModel->countAllResults();
+            $totalMobil = $this->mobilModel->countAllResults();
+            $totalPinjaman = $this->pinjamModel->where('status', 'Belum Dikembalikan')->countAllResults();
+            $mobilTersedia = $this->mobilModel->where('status', 'Tersedia')->countAllResults();
+
+            $PinjamanSelesai = $this->pinjamModel->where('status', 'Selesai')->countAllResults();
+        } else {
+            $totalUser = null;
+            $totalMobil = null;
+            $totalPinjaman = $this->pinjamModel->where('status', 'Belum Dikembalikan')->where('id_user', $user_id)->countAllResults();
+
+
+            $mobilTersedia = $this->mobilModel->where('status', 'Tersedia')->countAllResults();
+
+            $PinjamanSelesai = $this->pinjamModel->where('status', 'Selesai')->where('id_user', $user_id)->countAllResults();
+        }
         $data = [
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'totalUser' => $totalUser,
+            'totalMobil' => $totalMobil,
+            'mobilTersedia' => $mobilTersedia,
+
+            'totalPinjaman' => $totalPinjaman,
+
+            'pinjamanSelesai' => $PinjamanSelesai
         ];
         return view('Dashboard', $data);
     }

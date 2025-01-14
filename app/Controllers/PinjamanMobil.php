@@ -22,7 +22,7 @@ class PinjamanMobil extends BaseController
             'listpinjaman' => $this->PinjamanModel->getListPinjaman(),
 
         ];
-        return view('ListPinjaman', $data);
+        return view('ListPinjaman1', $data);
     }
 
     public function PinjamMobil()

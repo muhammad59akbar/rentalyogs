@@ -5,6 +5,11 @@
     <h1>Edit Data Mobil</h1>
     <hr>
     <!-- alert -->
+    <?php if (session()->getFlashdata('message')) : ?>
+        <div class="alert alert-success mt-2" role="alert">
+            <?= session()->getFlashdata('message') ?>
+        </div>
+    <?php endif; ?>
     <a href="<?= base_url('/ListMobil') ?>" class="m-2">&laquo; Kembali</a>
 
     <form id="formproduk" action="<?= base_url('/editDataMobil/' . $mobil['id_mobil']) ?>" method="post" enctype="multipart/form-data">
