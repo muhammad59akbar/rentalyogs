@@ -40,3 +40,9 @@ body {
       /* Adjust margin for main content on desktop */
   }
 }
+
+@media print {
+  .no-print {
+      display: none ;
+  }
+}
