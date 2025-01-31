@@ -1,7 +1,7 @@
 <?= $this->extend('Layouts/Templates'); ?>
 <?= $this->section('content'); ?>
 <div class="main-content mt-5" id="mainContent">
-    <h2 class="mt-2">Edit User</h2>
+    <h2 class="mt-2 titleku">Edit User</h2>
 
 
     <hr>

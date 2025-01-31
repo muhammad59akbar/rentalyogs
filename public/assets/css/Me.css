@@ -24,7 +24,6 @@ body {
 
 .main-content {
   margin-left: 0;
-  
   padding: 20px;
   transition: margin-left 0.3s;
 }
@@ -37,12 +36,54 @@ body {
 
   .main-content {
       margin-left: 250px;
+      
+
+     
       /* Adjust margin for main content on desktop */
+  }
+  
+
+}
+
+@media screen and (max-width: 768px){
+  .titleku {
+    padding-top: 4rem;
   }
 }
 
-@media print {
-  .no-print {
-      display: none ;
-  }
+.buttons-copy {
+  margin: 5px;
+ 
+  border: none;
+  
+}
+.buttons-csv{
+  margin: 5px;
+  border: none;
+}
+.buttons-excel{
+  margin: 5px;
+  border: none;
+}
+.buttons-print{
+  margin: 5px;
+  border: none;
+}
+.buttons-pdf{
+  margin: 5px;
+  border: none;
+}
+.dt-buttons{
+  display: flex;
+  justify-content: center;
+}
+.dt-search{
+  display: flex;
+  justify-content: flex-end;
+}
+.dt-button-info{
+  width: 100%;
+
+  text-align: center;    
+  
 }

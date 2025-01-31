@@ -1,7 +1,7 @@
 <?= $this->extend('Layouts/Templates'); ?>
 <?= $this->section('content'); ?>
 <div class="main-content mt-5" id="mainContent">
-    <h2 class="mt-2">List Mobil</h2>
+    <h2 class="mt-2 titleku">List Mobil</h2>
     <hr>
 
 
@@ -50,14 +50,17 @@
                             </div>
                         </div>
 
-                        <?= view('Pinjam', ['mbl' => $mbl]) ?>
+
 
 
 
 
                         <?php if (in_groups(['Admin'])) : ?>
 
-                            <a href="<?= base_url('DetailMobil/' . $mbl['no_stnk']) ?>" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                            <a href="<?= base_url('DetailMobil/' . url_title($mbl['no_plat'], '-')) ?>" class="btn btn-success">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
 
                             <form class="d-inline" method="post" action="<?= base_url('/DeleteDataMobil/' . $mbl['id_mobil']) ?>">
                                 <?= csrf_field(); ?>

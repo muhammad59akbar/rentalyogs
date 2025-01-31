@@ -2,7 +2,7 @@
 <?= $this->section('content'); ?>
 
 <div class="main-content mt-5" id="mainContent">
-    <h1>Edit Data Mobil</h1>
+    <h1 class="titleku">Edit Data Mobil</h1>
     <hr>
     <!-- alert -->
     <?php if (session()->getFlashdata('message')) : ?>
@@ -20,7 +20,6 @@
                 <input type="hidden" name="gmbrmobillama" value="<?= $mobil['img_mobil'] ?>">
                 <label for="merkmobil" class="form-label">Merk Mobil</label>
                 <input type="text" class="form-control" id="merkmobil" aria-describedby="merkmobil" name="merkmobil" required value="<?= $mobil['merk_mobil'] ?>">
-
 
             </div>
 
@@ -41,15 +40,14 @@
 
             <div class="mb-2 ">
                 <label for="noplat" class="form-label">No Plat</label>
-                <input class="form-control" type="text" id="noplat" name="noplat" value="<?= $mobil['no_plat'] ?>">
+                <input class="form-control <?= session('errors.noplat') ? 'is-invalid' : '' ?>" type="text" id="noplat" name="noplat" value="<?= $mobil['no_plat'] ?>">
+                <div class="invalid-feedback">
+                    <?= session('errors.noplat') ?>
+                </div>
 
             </div>
 
-            <div class="mb-2 ">
-                <label for="nostnk" class="form-label">No STNK</label>
-                <input class="form-control" type="text" id="nostnk" name="nostnk" value="<?= $mobil['no_stnk'] ?>">
 
-            </div>
 
 
 

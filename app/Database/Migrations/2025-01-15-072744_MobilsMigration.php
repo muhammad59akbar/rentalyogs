@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Mobils extends Migration
+class MobilsMigration extends Migration
 {
     public function up()
     {
@@ -30,10 +30,6 @@ class Mobils extends Migration
             'img_mobil' => [
                 'type' => 'VARCHAR',
                 'constraint' => '50'
-            ],
-            'no_stnk' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '100',
             ],
             'status' => [
                 'type' => 'ENUM',

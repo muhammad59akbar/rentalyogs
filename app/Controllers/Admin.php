@@ -25,29 +25,24 @@ class Admin extends BaseController
     public function index(): string
     {
 
-        $user_id = user_id();
+
+
+
         if (in_groups('Admin')) {
-            $totalUser = $this->userModel->countAllResults();
+
             $totalMobil = $this->mobilModel->countAllResults();
             $totalPinjaman = $this->pinjamModel->where('status', 'Belum Dikembalikan')->countAllResults();
             $mobilTersedia = $this->mobilModel->where('status', 'Tersedia')->countAllResults();
 
             $PinjamanSelesai = $this->pinjamModel->where('status', 'Selesai')->countAllResults();
-        } else {
-            $totalUser = null;
-            $totalMobil = null;
-            $totalPinjaman = $this->pinjamModel->where('status', 'Belum Dikembalikan')->where('id_user', $user_id)->countAllResults();
-
-
-            $mobilTersedia = $this->mobilModel->where('status', 'Tersedia')->countAllResults();
-
-            $PinjamanSelesai = $this->pinjamModel->where('status', 'Selesai')->where('id_user', $user_id)->countAllResults();
+            $prosesPinjaman =  $this->pinjamModel->getListPinjaman();
         }
         $data = [
             'title' => 'Dashboard',
-            'totalUser' => $totalUser,
+
             'totalMobil' => $totalMobil,
             'mobilTersedia' => $mobilTersedia,
+            'prosesPinjaman' => $prosesPinjaman,
 
             'totalPinjaman' => $totalPinjaman,
 

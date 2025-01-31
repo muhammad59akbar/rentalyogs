@@ -52,13 +52,7 @@
                             <?= session('errors.noplat') ?>
                         </div>
                     </div>
-                    <div class="mb-2 ">
-                        <label for="nostnk" class="form-label">No STNK</label>
-                        <input class="form-control  <?= session('errors.nostnk') ? 'is-invalid' : '' ?>" type="text" id="nostnk" name="nostnk" placeholder="Example A12345677890ASD">
-                        <div class="invalid-feedback">
-                            <?= session('errors.nostnk') ?>
-                        </div>
-                    </div>
+
 
 
                 </div>
