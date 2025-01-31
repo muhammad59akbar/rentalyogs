@@ -9,7 +9,7 @@ class MobilsModels extends Model
     protected $table      = 'mobil_items';
     protected $primaryKey = 'id_mobil';
     protected $useTimestamps = true;
-    protected $allowedFields = ['merk_mobil', 'no_plat', 'warna_mobil', 'img_mobil', 'no_stnk', 'status'];
+    protected $allowedFields = ['merk_mobil', 'no_plat', 'warna_mobil', 'img_mobil', 'status'];
 
     public function getMobils($url = false)
     {
@@ -17,10 +17,23 @@ class MobilsModels extends Model
             return $this->findAll();
         }
 
-        $nostnk =  $this->where(['no_stnk' => $url])->first();
-        if (!$nostnk) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Mobil dengan No $nostnk tidak ditemukan.");
+        $url_no_plat = str_replace('-', ' ', $url);
+
+
+
+
+        $noplat = $this->where(['no_plat' => $url_no_plat])->first();
+
+
+
+
+
+
+
+
+        if (!$noplat) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Mobil dengan No $url_no_plat tidak ditemukan.");
         }
-        return $nostnk;
+        return $noplat;
     }
 }

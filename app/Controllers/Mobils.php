@@ -39,19 +39,12 @@ class Mobils extends BaseController
                 ]
             ],
             'noplat' => [
-                'rules' => 'required',
+                'rules' => 'required|is_unique[mobil_items.no_plat]|regex_match[/^(?! )[a-zA-Z0-9\s]+$/]',
                 'errors' => [
                     'required' => 'Plat Mobil Wajib Diisi'
                 ]
             ],
-            'nostnk' => [
-                'rules' => 'required|regex_match[/^\S+$/]|is_unique[mobil_items.no_stnk]',
-                'errors' => [
-                    'required' => 'No STNK Wajib Diisi',
-                    'is_unique' => 'No STNK Sudah Terdaftar !!!',
-                    'regex_match' => 'No STNK Harap Diisi Dengan Benar !!!'
-                ]
-            ],
+
             'gmbr_mbl' => [
                 'rules' => 'max_size[gmbr_mbl,1024]|is_image[gmbr_mbl]|mime_in[gmbr_mbl,image/jpg,image/jpeg,image/png]',
                 'errors' => [
@@ -83,7 +76,6 @@ class Mobils extends BaseController
             'merk_mobil' => $this->request->getPost('merkmobil'),
             'no_plat' => $this->request->getPost('noplat'),
             'warna_mobil' => $this->request->getPost('warnambl'),
-            'no_stnk' => $this->request->getPost('nostnk'),
             'img_mobil' => $NImageMobil
 
         ];
@@ -120,19 +112,12 @@ class Mobils extends BaseController
                 ]
             ],
             'noplat' => [
-                'rules' => 'required',
+                'rules' => 'required|regex_match[/^(?! )[a-zA-Z0-9\s]+$/]|is_unique[mobil_items.no_plat, id_mobil,' . $id_mobil . ']',
                 'errors' => [
                     'required' => 'Plat Mobil Wajib Diisi'
                 ]
             ],
-            'nostnk' => [
-                'rules' => 'required|regex_match[/^\S+$/]|is_unique[mobil_items.no_stnk, id_mobil,' . $id_mobil . ']',
-                'errors' => [
-                    'required' => 'No STNK Wajib Diisi',
-                    'is_unique' => 'No STNK Sudah Terdaftar !!!',
-                    'regex_match' => 'No STNK Harap Diisi Dengan Benar !!!'
-                ]
-            ],
+
             'gmbr_mbl' => [
                 'rules' => 'max_size[gmbr_mbl,1024]|is_image[gmbr_mbl]|mime_in[gmbr_mbl,image/jpg,image/jpeg,image/png]',
                 'errors' => [
@@ -148,8 +133,10 @@ class Mobils extends BaseController
 
         if (!$this->validate($validationRules)) {
 
-            return redirect()->to('/ListMobil')->withInput()->with('errors', $this->validator->getErrors());
+
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
+
 
         $imageMobil = $this->request->getFile('gmbr_mbl');
         $imgMobilOld = $this->request->getPost('gmbrmobillama');
@@ -167,19 +154,20 @@ class Mobils extends BaseController
             unlink('assets/images/mobil/' . $imgMobilOld);
         }
 
-        $nostnk = $this->request->getPost('nostnk');
+        $noplat = $this->request->getPost('noplat');
 
         $data = [
             'id_mobil' => $id_mobil,
             'merk_mobil' => $this->request->getPost('merkmobil'),
-            'no_plat' => $this->request->getPost('noplat'),
+            'no_plat' =>  $noplat,
             'warna_mobil' => $this->request->getPost('warnambl'),
-            'no_stnk' => $nostnk,
+
             'img_mobil' => $NImageMobil
 
         ];
         $this->MobilModel->save($data);
-        return redirect()->to('/DetailMobil/' . $nostnk)->with('message', 'Data Berhasil di ubah !!!');
+        $url_title = str_replace(' ', '-', $noplat);
+        return redirect()->to('/DetailMobil/' . $url_title)->with('message', 'Data Berhasil di ubah !!!');
     }
 
     public function deletedataMobil($id_mobil)
