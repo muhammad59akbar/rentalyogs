@@ -64,6 +64,20 @@
                             <?= session('errors.tgl_kembalikan') ?>
                         </div>
                     </div>
+                    <div class="d-flex flex-column">
+                        <label for="tgl_kembalikan" class="form-label ">Tujuan</label>
+                        <input type="text" class="form-control <?= session('errors.tujuan') ? 'is-invalid' : '' ?>" id="tujuan" aria-describedby="tgl_kembalikan" name="tujuan" value="<?= old('tujuan') ?>">
+                        <div class="invalid-feedback">
+                            <?= session('errors.tujuan') ?>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <label for="jemput" class="form-label ">Titik Penjemputan</label>
+                        <input type="text" class="form-control <?= session('errors.jemput') ? 'is-invalid' : '' ?>" id="jemput" aria-describedby="jemput" name="jemput" value="<?= old('jemput') ?>">
+                        <div class="invalid-feedback">
+                            <?= session('errors.jemput') ?>
+                        </div>
+                    </div>
 
 
 

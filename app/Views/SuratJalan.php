@@ -10,6 +10,8 @@
 </head>
 
 
+
+
 <body>
     <div class="kop-surat" style="display: flex; align-items: center; gap: 20px;">
         <img src="<?= base_url('assets/images/kop.jpeg') ?>" alt="Logo" style="width: 100px; height: auto;">
@@ -25,10 +27,16 @@
 
     <div class="content">
         <h4 style="text-align: center;">SURAT TUGAS</h4>
-        <p style="text-align: center;"><i>Nomor : <?= $listpinjaman['id_pinjaman'] ?> /ST-KDO/IX/2024 </i> </p>
+        <?php
+        $bulanRomawi = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+        $bulanSekarang = date('n');
+        ?>
+
+
+        <p style="text-align: center;"><i>Nomor : <?= $listpinjaman['id_pinjaman'] ?> /ST-KDO/<?= $bulanRomawi[$bulanSekarang - 1] ?>/2025 </i> </p>
         <div class="konten-surat">
             <p>
-                Dalam rangka memfasilitasi kegiatan DPRD dan Sekretariat DPRD Provinsi DKI Jakarta diluar kantor, dengan ini Kasubbag Perlengkapan Sekretariat DPRD Provinsi DKI Jakarta.
+                Dalam rangka memfasilitasi kegiatan Pimpinan, Anggota DPRD dan Sekretariat DPRD Provinsi DKI Jakarta diluar kantor, dengan ini Kasubbag Perlengkapan Sekretariat DPRD Provinsi DKI Jakarta.
             </p>
 
         </div>
@@ -68,8 +76,12 @@
                 <td>: <?= $listpinjaman['no_plat'] ?></td>
             </tr>
             <tr>
-                <td><strong>Tujuan</strong></td>
-                <td>: tetetete</td>
+                <td><strong>Titik Penjemputan</strong></td>
+                <td>: <?= $listpinjaman['penjemputan'] ?></td>
+            </tr>
+            <tr>
+                <td><strong>Titik Tujuan</strong></td>
+                <td>: <?= $listpinjaman['tujuan'] ?></td>
             </tr>
         </table>
 
@@ -78,12 +90,14 @@
 
     <!-- Tanda Tangan -->
     <div class="footer">
-        <p>Jakarta, <?= strftime('%d %B %Y') ?></p>
+        <p>Jakarta, <?= date('d F Y') ?></p>
         <p>Kasubbag Perlengkapan</p>
         <div class="signature"></div>
         <p>Juniadi Jatno Prasetyo</p>
         <p>NIP. 196906091997031006</p>
     </div>
+
+    <span class="timestamp"><?= date('Y-m-d H:i:s') ?></span>
 </body>
 <script type="text/javascript">
     $(document).ready(function() {

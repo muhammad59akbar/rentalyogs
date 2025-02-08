@@ -12,6 +12,14 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
+                <h5>Nama Peminjam</h5>
+            </div>
+            <div class="col-lg-5">
+                <p>: <?= $listpinjaman['namapeminjam'] ?></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
                 <h5>Nama Driver</h5>
             </div>
             <div class="col-lg-5">
@@ -87,6 +95,22 @@
             </div>
             <div class="col-lg-5">
                 <p>: <?= $listpinjaman['status'] ?></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <h5>Titik Penjemputan</h5>
+            </div>
+            <div class="col-lg-5">
+                <p>: <?= $listpinjaman['penjemputan'] ?></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <h5>Titik Tujuan</h5>
+            </div>
+            <div class="col-lg-5">
+                <p>: <?= $listpinjaman['tujuan'] ?></p>
             </div>
         </div>
 

@@ -107,38 +107,40 @@
             events: [
                 <?php
                 $today = date('Y-m-d');
-                foreach ($prosesPinjaman as $pinjaman):
+                foreach ($prosesPinjaman as $pinjaman): ?> {
 
-                    if ($pinjaman['tanggal_kembali'] >= $today): ?> {
-                            title: "<?= $pinjaman['namapeminjam']; ?>",
-                            start: "<?= $pinjaman['tanggal_pinjaman']; ?>",
-                            backgroundColor: "#137bff",
-                            extendedProps: {
-                                merk_mobil: "<?= $pinjaman['merk_mobil']; ?>",
-                                no_plat: "<?= $pinjaman['no_plat']; ?>",
-                                titik_penjemputan: "<?= $pinjaman['penjemputan']; ?>",
-                                titik_tujuan: "<?= $pinjaman['tujuan']; ?>"
-                            },
-                            description: "Nama: <?= $pinjaman['nama_driver']; ?> Merk Mobil: <?= $pinjaman['merk_mobil']; ?> No Plat: <?= $pinjaman['no_plat']; ?>"
+
+
+                        title: "<?= $pinjaman['namapeminjam']; ?>",
+                        start: "<?= $pinjaman['tanggal_pinjaman']; ?>",
+                        backgroundColor: "<?= ($pinjaman['status'] === 'Pending') ? '#ffdf13' : (($pinjaman['status'] === 'Belum Dikembalikan') ? '#137bff' : (($pinjaman['status'] === 'Selesai') ? '#00ff3a' : '#ff0000')); ?>",
+
+                        extendedProps: {
+                            merk_mobil: "<?= $pinjaman['merk_mobil']; ?>",
+                            no_plat: "<?= $pinjaman['no_plat']; ?>",
+                            titik_penjemputan: "<?= $pinjaman['penjemputan'] ?>",
+                            titik_tujuan: "<?= $pinjaman['tujuan'] ?>"
+
                         },
-                        {
-                            title: "<?= $pinjaman['namapeminjam']; ?>",
-                            start: "<?= $pinjaman['tanggal_kembali']; ?>",
-                            backgroundColor: "#137bff",
-                            extendedProps: {
-                                merk_mobil: "<?= $pinjaman['merk_mobil']; ?>",
-                                no_plat: "<?= $pinjaman['no_plat']; ?>",
-                                titik_penjemputan: "<?= $pinjaman['penjemputan']; ?>",
-                                titik_tujuan: "<?= $pinjaman['tujuan']; ?>"
-                            },
-                            description: "Nama: <?= $pinjaman['nama_driver']; ?> Merk Mobil: <?= $pinjaman['merk_mobil']; ?> No Plat: <?= $pinjaman['no_plat']; ?> Titik Penjemputan: <?= $pinjaman['penjemputan']; ?> Titik Tujuan: <?= $pinjaman['tujuan']; ?>"
+                        description: "Nama: <?= $pinjaman['nama_driver']; ?> Merk Mobil: <?= $pinjaman['merk_mobil']; ?> No Plat: <?= $pinjaman['no_plat']; ?>"
+                    },
+                    {
+                        title: "<?= $pinjaman['namapeminjam']; ?>",
+                        start: "<?= $pinjaman['tanggal_kembali']; ?>",
+                        backgroundColor: "<?= ($pinjaman['status'] === 'Pending') ? '#ffdf13' : (($pinjaman['status'] === 'Belum Dikembalikan') ? '#137bff' : (($pinjaman['status'] === 'Selesai') ? '#00ff3a' : '#ff0000')); ?>",
+                        extendedProps: {
+                            merk_mobil: "<?= $pinjaman['merk_mobil']; ?>",
+                            no_plat: "<?= $pinjaman['no_plat']; ?>",
+                            titik_penjemputan: "<?= $pinjaman['penjemputan'] ?>",
+                            titik_tujuan: "<?= $pinjaman['tujuan'] ?>"
                         },
-                <?php
-                    endif;
-                endforeach; ?>
+                        description: "Nama: <?= $pinjaman['nama_driver']; ?> Merk Mobil: <?= $pinjaman['merk_mobil']; ?> No Plat: <?= $pinjaman['no_plat']; ?> Titik Penjemputan: <?= $pinjaman['penjemputan']; ?> Titik Tujuan: <?= $pinjaman['tujuan']; ?>"
+                    },
+                <?php endforeach; ?>
             ],
             displayEventTime: false,
             eventClick: function(info) {
+
                 var title = info.event.title;
                 var merkMobil = info.event.extendedProps.merk_mobil;
                 var noPlat = info.event.extendedProps.no_plat;
@@ -150,7 +152,7 @@
                 <p>Titik Penjemputan: ${titik_penjemputan}</p>
                 <p>Titik Tujuan: ${titik_tujuan}</p>
                 <p>No Plat: ${noPlat}</p>
-                `;
+            `;
                 document.getElementById('modal-body').innerHTML = modalContent;
                 var modal = new bootstrap.Modal(document.getElementById('eventModal'));
                 modal.show();
@@ -160,7 +162,6 @@
         calendar.render();
     });
 </script>
-
 
 
 <?= $this->endSection(); ?>

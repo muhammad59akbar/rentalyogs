@@ -36,10 +36,28 @@ class PinjamanMigration extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
+            'tujuan' => [
+                'type' => 'VARCHAR',
+                'constraint' => '50'
+            ],
+            'penjemputan' => [
+                'type' => 'VARCHAR',
+                'constraint' => '50'
+            ],
+            'namapeminjam' => [
+                'type' => 'VARCHAR',
+                'constraint' => '50'
+            ],
+
             'status' => [
                 'type' => 'ENUM',
-                'constraint' => ['Selesai', 'Belum Dikembalikan'],
-                'default' => 'Belum Dikembalikan',
+                'constraint' => ['Selesai', 'Disetujui', 'Pending'],
+                'default' => 'Pending',
+            ],
+            'approved_by' => [
+                'type'       => 'INT',
+                'unsigned'   => true,
+                'null'       => true,
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -55,10 +73,7 @@ class PinjamanMigration extends Migration
 
         $this->forge->addForeignKey('id_mobil', 'mobil_items', 'id_mobil', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('i_driver', 'driver_mobil', 'id_driver', 'SET NULL', 'CASCADE');
-
-
-
-
+        $this->forge->addForeignKey('approved_by', 'users', 'id', 'SET NULL', 'CASCADE');
 
 
         $this->forge->createTable('pinjaman_mobils');

@@ -14,6 +14,7 @@ class Admin extends BaseController
     protected $groupModel;
     protected $pinjamModel;
     protected $mobilModel;
+    protected $KembalikanMobil;
 
     public function __construct()
     {
@@ -21,22 +22,30 @@ class Admin extends BaseController
         $this->groupModel = new GroupModel();
         $this->pinjamModel = new PinjamanModels();
         $this->mobilModel = new MobilsModels();
+        $this->KembalikanMobil = new PinjamanMobil();
     }
     public function index(): string
     {
+        $this->KembalikanMobil->KembalikanMobil();
 
 
+        $totalMobil = $this->mobilModel->countAllResults();
+        $totalPinjaman = $this->pinjamModel->where('status', 'Belum Dikembalikan')->countAllResults();
+        $mobilTersedia = $this->mobilModel->where('status', 'Tersedia')->countAllResults();
+
+        $PinjamanSelesai = $this->pinjamModel->where('status', 'Selesai')->countAllResults();
+        $prosesPinjaman =  $this->pinjamModel->getListPinjaman();
 
 
-        if (in_groups('Admin')) {
+        // if (in_groups('Admin')) {
 
-            $totalMobil = $this->mobilModel->countAllResults();
-            $totalPinjaman = $this->pinjamModel->where('status', 'Belum Dikembalikan')->countAllResults();
-            $mobilTersedia = $this->mobilModel->where('status', 'Tersedia')->countAllResults();
+        //     $totalMobil = $this->mobilModel->countAllResults();
+        //     $totalPinjaman = $this->pinjamModel->where('status', 'Belum Dikembalikan')->countAllResults();
+        //     $mobilTersedia = $this->mobilModel->where('status', 'Tersedia')->countAllResults();
 
-            $PinjamanSelesai = $this->pinjamModel->where('status', 'Selesai')->countAllResults();
-            $prosesPinjaman =  $this->pinjamModel->getListPinjaman();
-        }
+        //     $PinjamanSelesai = $this->pinjamModel->where('status', 'Selesai')->countAllResults();
+        //     $prosesPinjaman =  $this->pinjamModel->getListPinjaman();
+        // }
         $data = [
             'title' => 'Dashboard',
 
