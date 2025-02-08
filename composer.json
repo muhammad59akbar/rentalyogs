@@ -12,7 +12,6 @@
     "require": {
         "php": "^8.1",
         "codeigniter4/framework": "^4.0",
-        "daycry/cronjob": "^2.2",
         "myth/auth": "^1.2"
     },
     "require-dev": {

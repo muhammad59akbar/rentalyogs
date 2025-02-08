@@ -87,3 +87,23 @@ body {
   text-align: center;    
   
 }
+
+.keterangan ul {
+  display: flex; /* Biar <li> sejajar */
+  list-style: none; /* Hilangkan bullet point */
+  padding: 0;
+}
+
+.keterangan li {
+  padding: 5px;
+  margin: 5px;
+  background-color: #137bff;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+}
+
+
+
+
+

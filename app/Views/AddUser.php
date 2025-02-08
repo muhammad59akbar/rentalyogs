@@ -72,8 +72,8 @@
                     <div class="mb-3 mt-3">
                         <label class="form-label">Role</label>
                         <select class="form-select" aria-label="Default select example" name="role">
-                            <option value="1">Admin</option>
-                            <option value="2">User</option>
+                            <option value="1">Pengelola Barang</option>
+                            <option value="2">Admin</option>
                         </select>
 
                     </div>

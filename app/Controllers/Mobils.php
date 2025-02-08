@@ -7,13 +7,16 @@ use App\Models\MobilsModels;
 class Mobils extends BaseController
 {
     protected $MobilModel;
+    protected $KembalikanMobil;
 
     public function __construct()
     {
         $this->MobilModel = new MobilsModels();
+        $this->KembalikanMobil = new PinjamanMobil();
     }
     public function index(): string
     {
+        $this->KembalikanMobil->KembalikanMobil();
         $data = [
             'title' => 'List Mobil',
             'listMobil' => $this->MobilModel->getMobils(),

@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<?php if (in_groups('Admin')) : ?>
+<?php if (in_groups('Pengelola Barang')) : ?>
     <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#mobilsModal">
         <i class="bi bi-file-earmark-plus-fill"></i> Tambah Mobil
     </button>

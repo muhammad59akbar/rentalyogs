@@ -14,6 +14,9 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 
 </head>
 
@@ -32,7 +35,7 @@
         <div class="d-flex justify-content-between w-100 align-items-center">
 
             <h4 class="mt-2 mx-3 ">
-                <a class="navbar-brand" href="<?= base_url('/') ?>"> PT.Rentales </a>
+                <a class="navbar-brand text-white" href="<?= base_url('/') ?>"> SIPADA </a>
             </h4>
             <h6 class="p-2 mt-1 font-weight-light"> Logged as: <span class="font-weight-bold"> <?= user()->fullname; ?> </span></h6>
         </div>
@@ -50,20 +53,24 @@
                     <a class="nav-link text-white"
                         href="<?= base_url('/') ?>"> Dashboard </a>
                 </li>
-                <?php if (in_groups(['Admin'])) : ?>
+                <?php if (in_groups(['Pengelola Barang'])) : ?>
                     <li class="nav-item border-bottom border-white">
                         <a class="nav-link text-white"
-                            href="<?= base_url('/Admin/ListUser') ?>"> List User </a>
+                            href="<?= base_url('/Admin/ListUser') ?>"> Daftar User </a>
                     </li>
                 <?php endif; ?>
                 <li class="nav-item border-bottom border-white">
                     <a class="nav-link text-white"
-                        href="<?= base_url('/ListMobil') ?>"> List Mobil </a>
+                        href="<?= base_url('/ListMobil') ?>"> Daftar Mobil </a>
+                </li>
+                <li class="nav-item border-bottom border-white">
+                    <a class="nav-link text-white"
+                        href="<?= base_url('/ListDriver') ?>"> Daftar Driver</a>
                 </li>
 
                 <li class="nav-item border-bottom border-white">
                     <a class="nav-link text-white"
-                        href="<?= base_url('/ListPinjaman') ?>"> List Pinjaman </a>
+                        href="<?= base_url('/ListPinjaman') ?>"> Daftar Pinjaman </a>
                 </li>
 
 
@@ -95,46 +102,65 @@
 
     <script>
         $(document).ready(function() {
-            $('#ListPinjaman').DataTable({
+            var table = $('#ListPinjaman').DataTable({
                 paging: false,
                 "bInfo": false,
+                columnDefs: [{
+                    targets: 4,
+                    visible: false
+                }],
 
                 layout: {
                     topStart: {
                         buttons: [{
                                 extend: 'copyHtml5',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 5, 6, 7]
+                                }
                             },
                             {
                                 extend: 'csv',
                                 exportOptions: {
-                                    columns: [0, 1, 2, 3, 4, 5]
+                                    columns: [0, 1, 2, 3, 5, 6, 7]
                                 }
                             },
                             {
                                 extend: 'print',
                                 exportOptions: {
-                                    columns: [0, 1, 2, 3, 4, 5]
+                                    columns: [0, 1, 2, 3, 5, 6, 7]
                                 }
                             },
                             {
                                 extend: 'excelHtml5',
                                 exportOptions: {
-                                    columns: ':visible'
+                                    columns: [0, 1, 2, 3, 5, 6, 7]
                                 }
                             },
                             {
                                 extend: 'pdfHtml5',
                                 exportOptions: {
-                                    columns: [0, 1, 2, 3, 4, 5]
+                                    columns: [0, 1, 2, 3, 5, 6, 7]
                                 }
-                            },
-
-
+                            }
                         ],
-
                     }
                 },
+            });
 
+
+            var years = [];
+            table.column(4).data().each(function(value, index) {
+                if (!years.includes(value)) {
+                    years.push(value);
+                }
+            });
+            years.sort().reverse();
+            $.each(years, function(index, year) {
+                $('#filterYear').append('<option value="' + year + '">' + year + '</option>');
+            });
+            $('#filterYear').on('change', function() {
+                var selectedYear = $(this).val();
+                table.column(4).search(selectedYear).draw();
             });
         });
         $(document).ready(function() {

@@ -19,17 +19,7 @@ class MobilsModels extends Model
 
         $url_no_plat = str_replace('-', ' ', $url);
 
-
-
-
         $noplat = $this->where(['no_plat' => $url_no_plat])->first();
-
-
-
-
-
-
-
 
         if (!$noplat) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Mobil dengan No $url_no_plat tidak ditemukan.");

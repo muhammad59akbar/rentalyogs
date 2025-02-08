@@ -55,7 +55,7 @@
 
 
 
-                        <?php if (in_groups(['Admin'])) : ?>
+                        <?php if (in_groups(['Pengelola Barang'])) : ?>
 
                             <a href="<?= base_url('DetailMobil/' . url_title($mbl['no_plat'], '-')) ?>" class="btn btn-success">
                                 <i class="bi bi-pencil-square"></i>
